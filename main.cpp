@@ -1,39 +1,37 @@
 #include <iostream>
 #include "SessionLog.h"
-#include <chrono>
-#include <thread>
 
-using namespace std::this_thread;
-using namespace std::chrono; 
+SessionLog create_log(std::string title, std::string notes);
+void display_log(SessionLog log);
 
 int main(){
-    SessionLog sample_log {"Log 1", "Sunday 8-14-2022 - Back, Biceps, Triceps, Abs", 1, 0, 1, 0};
-    std::cout << std::boolalpha;
-    sample_log.display_timestamp();
-    std::cout << "Title: " << sample_log.get_title() << std::endl;
-    std::cout << "Workout Notes: " << sample_log.get_notes() << std::endl;
-    std::cout << "Upper Body Completed?: " << sample_log.get_upper_body() << std::endl;
-    std::cout << "Lower Body Completed?: " << sample_log.get_lower_body() << std::endl;
-    std::cout << "Core Work Completed?: " << sample_log.get_core() << std::endl;
-    std::cout << "Cardio Completed?: " << sample_log.get_cardio() << std::endl;
-    std::cout << std::noboolalpha;
+    std::string title_holder{};
+    std::string notes_holder{};
     
-    sleep_until(system_clock::now() + seconds(5));
+    std::cout << "Enter title: ";
+    std::getline(std::cin, title_holder);
+    std::cout << "Enter notes: ";
+    std::getline(std::cin, notes_holder);
     
-    SessionLog sample_log2 {"Log 2", "Monday 8-15-2022 - Boxing HIIT 20 30 minute workout", 1, 0, 0, 1};
-    std::cout << std::boolalpha;
-    sample_log2.display_timestamp();
-    std::cout << "Title: " << sample_log2.get_title() << std::endl;
-    std::cout << "Workout Notes: " << sample_log2.get_notes() << std::endl;
-    std::cout << "Upper Body Completed?: " << sample_log2.get_upper_body() << std::endl;
-    std::cout << "Lower Body Completed?: " << sample_log2.get_lower_body() << std::endl;
-    std::cout << "Core Work Completed?: " << sample_log2.get_core() << std::endl;
-    std::cout << "Cardio Completed?: " << sample_log2.get_cardio() << std::endl;
-    std::cout << std::noboolalpha;
-    
-    
+    SessionLog sample_log = create_log(title_holder, notes_holder);
+    display_log(sample_log);
     
     return 0;
-    
-    
 }
+
+SessionLog create_log(std::string title, std::string notes){
+    SessionLog log {title, notes};
+    return log;
+}
+
+void display_log(SessionLog log){
+    std::cout << std::endl;
+    std::cout << "Log Entry for [" << log.get_title() << "] workout session" << std::endl;
+    std::cout << "============================" << std::endl;
+    log.display_timestamp();
+    std::cout << "Log Notes: " << log.get_notes() << std::endl << std::endl;
+    std::cout << std::endl;
+}
+
+
+
