@@ -6,8 +6,7 @@
 class SessionLog
 {
 private:
-    //date time field for Log Entry Time - set to right now
-    //date field for Workout Date
+    time_t timestamp {time(0)};
     std::string title{};
     std::string notes {};
     bool upper_body {0};
@@ -19,6 +18,7 @@ public:
     ~SessionLog();
     std::string get_notes(){return this->notes;}
     std::string get_title(){return this->title;}
+    void display_timestamp();
     bool get_upper_body(){return this->upper_body;}
     bool get_lower_body(){return this->lower_body;}
     bool get_core(){return this->core;}

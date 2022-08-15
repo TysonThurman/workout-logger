@@ -18,3 +18,7 @@ SessionLog::~SessionLog()
     std::cout << "*******************************" << std::endl;
 }
 
+void SessionLog::display_timestamp(){
+       char* date_time = ctime(&timestamp);
+       std::cout << "Timestamp: " << date_time;
+}
