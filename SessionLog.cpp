@@ -10,7 +10,7 @@ SessionLog::~SessionLog()
 {
 }
 
-void SessionLog::display_timestamp(){
+void SessionLog::display_timestamp() const{
        char* date_time = ctime(&timestamp);
        std::cout << "Log Date: " << date_time;
 }

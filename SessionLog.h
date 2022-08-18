@@ -13,7 +13,7 @@ public:
     ~SessionLog();
     std::string get_notes(){return this->notes;}
     std::string get_title(){return this->title;}
-    void display_timestamp();
+    void display_timestamp() const;
 };
 
 #endif // SESSIONLOG_H
