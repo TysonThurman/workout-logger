@@ -34,4 +34,6 @@
 Debug/
 *.mk
 *.project
-*.txt
+
+workout-logger.txt
+compile_flags.txt
