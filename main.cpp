@@ -10,11 +10,14 @@ bool add_session_log();
 int option{0};
 
 int main(){    
-    while(option != 1 && option !=2 && option !=3 && option !=4){
-        print_menu();
-    }
     
-    //add_session_log();
+    add_session_log();
+//        
+//    while(option != 1 && option !=2 && option !=3 && option !=4){
+//        print_menu();
+//    }
+//    
+
     
     return 0;
 }
@@ -34,7 +37,7 @@ void display_log(SessionLog log){
 }
 
 void print_menu(){
-    //this option is *nix specific and will not work in windows
+    //this clear option will not work in windows
     system("clear");
     std::cout << "----------Workout Logger----------" << std::endl << std::endl;
     std::cout <<  "1.) Add Session Log\n2.) View Session Logs\n3.) Delete Session Log\n4.) Exit Program" << std::endl << std::endl;
@@ -53,12 +56,13 @@ bool add_session_log() {
     
     SessionLog new_log = create_log(title_holder, notes_holder);
     display_log(new_log);
+    char* converted_timestamp = ctime(&new_log.timestamp);
     
     std::ofstream output_file {"../Session_Log.txt", std::ios::app};
     if(!output_file){
         std::cerr << "Error opening or creating Session_Log.txt file" << std::endl;
     }
-    output_file << title_holder << "\n" << notes_holder << "\n";
+    output_file << "Log Date: " << converted_timestamp<< "Title: " << title_holder << "\n" << "Notes: " <<notes_holder << "\n" << "**********************\n";
     return true;
 }
 

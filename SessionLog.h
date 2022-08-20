@@ -5,10 +5,10 @@
 class SessionLog
 {
 private:
-    time_t timestamp {time(0)};
     std::string title{};
     std::string notes {};
 public:
+    time_t timestamp {time(0)};
     SessionLog(std::string title, std::string notes);
     ~SessionLog();
     std::string get_notes(){return this->notes;}
