@@ -1,4 +1,5 @@
 # workout-logger
+![workout-logger logo](workout-logger.png)
 
 <!-- ROADMAP -->
 ## Roadmap
