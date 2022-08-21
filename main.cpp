@@ -2,24 +2,38 @@
 #include "SessionLog.h"
 #include <fstream>
 #include <iomanip>
+#include <boost/predef.h>
 
 SessionLog create_log(std::string title, std::string notes);
 void display_log(SessionLog log);
 void print_menu();
 bool add_session_log();
-int option{0};
+void init();
+char option;
 
 int main(){    
-    
-    add_session_log();
-//        
-//    while(option != 1 && option !=2 && option !=3 && option !=4){
-//        print_menu();
-//    }
-//    
-
-    
+    init();
     return 0;
+}
+
+void init(){
+    do {
+        print_menu();
+        std::cin >> option;
+    } while (option != '1' && option !='2' && option !='3' && option !='4'); 
+    
+    switch(option) {
+       case '1'  :
+          add_session_log();
+          init();
+          break;
+       case '2'  :
+          break;
+       case '3'  :
+          break;
+       case '4'  :
+          break;
+    }
 }
 
 SessionLog create_log(std::string title, std::string notes){
@@ -37,20 +51,23 @@ void display_log(SessionLog log){
 }
 
 void print_menu(){
-    //this clear option will not work in windows
-    system("clear");
+    if(BOOST_OS_WINDOWS)
+        system("cls");
+    else if(BOOST_OS_LINUX)
+        system("clear");
+    else
+        system("clear");
     std::cout << "----------Workout Logger----------" << std::endl << std::endl;
     std::cout <<  "1.) Add Session Log\n2.) View Session Logs\n3.) Delete Session Log\n4.) Exit Program" << std::endl << std::endl;
     std::cout << "Please select an option: " << std::endl;
-    std::cin >> option;
 }
 
 bool add_session_log() {
     std::string title_holder{};
-    std::string notes_holder{};
-    
     std::cout << "Enter title: ";
     std::getline(std::cin, title_holder);
+    std::cin.get();
+    std::string notes_holder{};
     std::cout << "Enter notes: ";
     std::getline(std::cin, notes_holder);
     
@@ -65,6 +82,3 @@ bool add_session_log() {
     output_file << "Log Date: " << converted_timestamp<< "Title: " << title_holder << "\n" << "Notes: " <<notes_holder << "\n" << "**********************\n";
     return true;
 }
-
-
-
